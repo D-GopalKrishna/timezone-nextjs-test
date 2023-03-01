@@ -1,0 +1,3 @@
+set NEXT_AUTH_SECRET=some-random-secret-string
+set GOOGLE_CLIENT_ID=593305240027-l6u0renf2iak4c3fp9i49abtlvv09rs8.apps.googleusercontent.com
+set GOOGLE_CLIENT_SECRET=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

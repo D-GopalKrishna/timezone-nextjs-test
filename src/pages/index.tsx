@@ -1,9 +1,28 @@
 import Head from 'next/head'
 import { Inter } from 'next/font/google'
+import Link from 'next/link'
+
+// Custom Components 
+import Navbar from '@/components/book/Navbar'
 
 const inter = Inter({ subsets: ['latin'] })
 
-export default function Home() {
+type BtnProps = {
+  text: string
+  navigationTo: string
+}
+
+export const ButtonComponent: React.FC<BtnProps> = ({
+  text, navigationTo
+}) => {
+  return (
+    <div className="mr-2 mt-3">
+      <Link href={navigationTo} ><button style={styles.buttonStyle} className="btn rounded-lg bg-dark text-white btn-lg btn-block">{text}</button></Link>
+    </div>
+  )
+}
+
+function Home() {
   return (
     <>
       <Head>
@@ -13,8 +32,55 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <div>
-        
+        <Navbar />
+        <div className="d-flex flex-column align-items-center" style={styles.DescriptionContainer}>
+          <h2 className="text-2xl font-weight-bold text-white mx-5 mb-5">Welcome to Booking Engine by Renzo</h2>
+          <div className="mx-5 mb-4 w-50">
+            <p className="bg-dark text-white rounded-lg border-2 rounded-4  border-dark focus-outline-none focus:border-primary px-4 py-4 mb-3">Welcome to our booking engine! We are thrilled to help you find the perfect travel itinerary for your next adventure. Our user-friendly platform makes it easy to search for flights, hotels, and rental cars all in one place.</p>
+            <p className="bg-dark text-white rounded-lg border-2 rounded-4  border-dark focus-outline-none focus:border-primary px-4 py-4 mb-3">Simply enter your desired travel dates and destination, and our advanced search algorithm will present you with a variety of options to choose from. You can filter your results by price, airline, hotel rating, and more, to ensure that you find the best deal for your budget and preferences.</p>
+          </div>
+        </div>
+        {/* Design three buttons in columns with similar colors */}
+        <div style={styles.buttonContainer} className="d-flex flex-row justify-content-between align-items-center mx-auto">
+          {/* Design each of the threee in one row */}
+          <div className="d-flex flex-column ">
+            <ButtonComponent text={'Books'} navigationTo={'books'} />
+            <ButtonComponent text={'Index'} navigationTo={'index'} />
+          </div>
+          <div className="d-flex flex-column ">
+            <ButtonComponent text={'Property'} navigationTo={'property'} />
+            <ButtonComponent text={'Rooms'} navigationTo={'rooms'} />
+          </div>
+          <div className="d-flex flex-column ">
+            <ButtonComponent text={'Events'} navigationTo={'events'} />
+            <ButtonComponent text={'Bookings'} navigationTo={'bookings'} />
+          </div>
+        </div>
       </div>
     </>
   )
+}
+
+export async function getStaticProps() {
+  return {
+    props: {}, 
+  }
+}
+
+export default Home
+
+const styles = {
+  textColor: {
+    color: '#00f7ff',
+  },
+  DescriptionContainer: {
+    marginTop: '5%' 
+  },
+  buttonContainer: {
+    width: '40%',
+  },
+  buttonStyle: {
+    width: 130,
+    border: '1px solid #007b80',
+  }
 }

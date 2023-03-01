@@ -1,7 +1,8 @@
 import Link from 'next/link'
 import React from 'react'
-
+import {wrapper} from '@/store/store'
 import Navbar from '@/components/book/Navbar'
+import {setupbookInfo} from '@/store/books/bookSlice'
 
 export default function Books({books}){
     return (
@@ -26,15 +27,19 @@ export default function Books({books}){
     )
 }
 
-export const getServerSideProps = async (context) => {
+
+export const getServerSideProps = wrapper.getServerSideProps(store => async (context) => {
     const res = await fetch(`http://localhost:3000/api/books`)
     const books = await res.json()
+    console.log("store in Books List Page:", store.dispatch(setupbookInfo({
+        books: books
+    })))
     return {
         props: {
-            books
+            books,
         }
     }
-}
+})
 
 const styles = {
     mainContainer: {

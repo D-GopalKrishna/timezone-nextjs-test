@@ -10,16 +10,23 @@ export const bookInfoSlice = createSlice({
     initialState,
     reducers: {
         setupbookInfo: (state, action) => {
+            console.log('setupbookInfo', state, action.payload);
             let response = action.payload
             state.books = response.books
         },
     },
     extraReducers: {
         [HYDRATE]: (state, action) => {
-            console.log('HYDRATE', state, action.payload);
+            console.log('HYDRATE', action.payload);
+            if (action.payload.bookStore.books) {
+                const newbookList = action.payload.bookStore.books
+                return {
+                    ...state,
+                    books: newbookList,
+                };
+            }
             return {
                 ...state,
-                ...action.payload.books
             };
         },
     },

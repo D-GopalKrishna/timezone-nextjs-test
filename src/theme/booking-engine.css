@@ -1,0 +1,68 @@
+/**
+* Custom Styles for booking engine
+*
+*/
+
+/* Logo */
+
+.navbar-brand > img {
+    width: 50px;
+}
+
+/* Property Home */
+.main-container {
+    min-height: 60vh;
+}
+
+.home-header, .room-type-header, .event-header, .property-page-header {
+    background-image: url("../assets/images/resource/place-holder-bg.svg");
+}
+
+.home-header-inner, .home-header-inner-empty {
+    min-height: 600px;
+    background: linear-gradient(rgba(45, 45, 45, 0.9) 0%, rgba(45, 45, 45, 0.2) 100%);
+}
+
+.home-header-inner-empty{
+    background: none;
+}
+
+.room-type-header-inner, .event-header-inner, .booking-header-inner, .property-page-header-inner {
+    min-height: 300px;
+    background: linear-gradient(rgba(45, 45, 45, 0.9) 0%, rgba(45, 45, 45, 0.4) 100%);
+}
+
+.booking-header-inner {
+    min-height: 120px;
+}
+
+/* Global inline list */
+.inline-list-spacing li {
+    margin-right: 1.5rem !important;
+    margin-bottom: 0.5rem !important;
+}
+
+/* List Style */
+ul.list-inline-formatted li {
+    margin-right: 2.5rem !important;
+}
+
+/* Logo */
+.logo-container {
+    width: 100px;
+}
+
+.logo-container > img {
+    max-width: 100%;
+}
+
+/* Calender / Datepicker */
+#datePicker {
+    z-index: 999;
+}
+
+/* Link */
+.no-a-link{
+    text-decoration: none;
+    color: #212429 !important;
+}

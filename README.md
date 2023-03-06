@@ -4,7 +4,7 @@ A sample project to show how to use Next.js with
 - Redux store and 
 - Using Identity Providers
 - TypeScript
-- Tailwind CSS
+- Bootstrap CSS
 
 ## Getting Started
 

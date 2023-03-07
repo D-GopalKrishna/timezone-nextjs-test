@@ -10,6 +10,7 @@ type Props = {
     data: any, 
     data2: any
 }
+
 export default function Page(props: Props) {
     const date = new Date(props.data.utc_datetime)
     const timeZone = props.data.timezone

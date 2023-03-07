@@ -42,7 +42,7 @@ export const getServerSideProps = wrapper.getServerSideProps(store => async (con
     const res = await fetch(`${server}/api/books`)
     const books = await res.json()
     console.log("store in Books List Page:", books)
-    store.dispatch(setupbookInfo({books: books}))
+store.dispatch(setupbookInfo({books: books}))
     return {
         props: {
             books,

@@ -32,9 +32,12 @@ export default function IndividualBook(props: BookParams) {
     )
 }
 
+const dev = process.env.NODE_ENV !== 'production';
+const server = dev ? 'http://localhost:3000' : 'https://test-projects-nextjs-test-7pb8.vercel.app';
+
 export const getServerSideProps = async (context: any) => {
     const { id } = context.params
-    const res = await fetch(`http://localhost:3000/api/books`)
+    const res = await fetch(`${server}/api/books`)
     const books = await res.json()
     const book = books[id-1]
 

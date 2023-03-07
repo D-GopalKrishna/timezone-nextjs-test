@@ -1,23 +1,39 @@
 import { createSlice } from '@reduxjs/toolkit'
 import {HYDRATE} from 'next-redux-wrapper';
 
-const initialState = {
-    books: {},
+type Book = {
+    title: string;
+    pages: number;
+    languages: string;
+}
+export type BookStoreType = {
+    books: Book[];
+}
+
+// Define the initial state using that type
+const initialState: BookStoreType = {
+    books: [],
+};
+
+// Payload Action
+interface PayloadAction<T> {
+    type: string;
+    payload: T;
 }
 
 export const bookInfoSlice = createSlice({
     name: 'bookInfo',
     initialState,
     reducers: {
-        setupbookInfo: (state, action) => {
+        setupbookInfo: (state: BookStoreType, action: PayloadAction<BookStoreType>) => {
             console.log('setupbookInfo', state, action.payload);
             let response = action.payload
-            state.books = response.books
         },
+            
     },
     extraReducers: {
-        [HYDRATE]: (state, action) => {
-            console.log('HYDRATE', action.payload);
+        [HYDRATE]: (state: any, action: any) => {
+            // console.log('HYDRATE', action.payload);
             if (action.payload.bookStore.books) {
                 const newbookList = action.payload.bookStore.books
                 return {

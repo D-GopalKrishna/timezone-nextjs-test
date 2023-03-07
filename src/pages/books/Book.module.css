@@ -1,0 +1,21 @@
+
+.mainContainer {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+.container {
+    width: 80%;
+}
+
+.BookContainer {
+    margin: 1rem; 
+    margin-bottom: 50px; 
+    padding: 15px 30px;
+    border-radius: 10px; 
+    box-shadow: 0 0 10px rgba(0,0,0,0.1); 
+}
+.LinkContainer {
+    text-decoration: none; 
+    color: white;
+}

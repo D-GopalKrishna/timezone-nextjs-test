@@ -1,8 +1,17 @@
 import Navbar from '@/components/book/Navbar'
 import React from 'react'
 
-export default function IndividualBook({book}) {
-    if (!book) {
+type BookParams = {
+    book: {
+        id: number,
+        title: string,
+        pages: number,
+        language: string
+    },
+}
+
+export default function IndividualBook(props: BookParams) {
+    if (!props.book) {
         return (
             <div>Error in this Book </div>
         )
@@ -11,19 +20,19 @@ export default function IndividualBook({book}) {
     return (
         <>
             <Navbar />
-            <div key={book.id} style={styles.container}>
+            <div key={props.book?.id} style={styles.container}>
                 <button onClick={() => window.history.back()} className="btn bg-dark text-white mb-5">Go Back</button>            
                 <div style={styles.BookinfoContainer} className="bg-dark">
-                    <h1>Title: {book.title}</h1>
-                    <p>Pages: {book.pages}</p>
-                    <p>Language: {book.language}</p>
+                    <h1>Title: {props.book?.title}</h1>
+                    <p>Pages: {props.book?.pages}</p>
+                    <p>Language: {props.book?.language}</p>
                 </div>
             </div>
         </>
     )
 }
 
-export const getServerSideProps = async (context) => {
+export const getServerSideProps = async (context: any) => {
     const { id } = context.params
     const res = await fetch(`http://localhost:3000/api/books`)
     const books = await res.json()

@@ -1,31 +1,14 @@
 import { configureStore, combineReducers, ThunkAction, Store } from '@reduxjs/toolkit'
 import {Action} from 'redux';
 import { HYDRATE, createWrapper } from 'next-redux-wrapper'
-
-export interface State {
-    tick: string;
-}
+import { BookStoreType } from './books/bookSlice'
 
 // All the local reducers
 import bookReducer from './books/bookSlice'
 
-// const combinedReducer = combineReducers({
-//     bookReducer,
-// });
-
-
-// const masterReducer = (state, action) => {
-//     if (action.type === HYDRATE) {
-//         const newState = {
-//             ...state, // use previous state
-//             ...action.addBook, 
-//         }
-//         return newState
-//     }else{
-//         state = state
-//         return combinedReducer(state, action)
-//     }
-// }
+export interface State {
+    bookStore: BookStoreType;
+}
 
 
 export const makeStore = () =>

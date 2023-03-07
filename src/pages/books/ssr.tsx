@@ -3,51 +3,37 @@ import Link from 'next/link'
 import React, { useEffect } from 'react'
 import {wrapper} from '@/store/store'
 import Navbar from '@/components/book/Navbar'
-import moment from 'moment'
+import { format, compareAsc } from 'date-fns'
+import { zonedTimeToUtc, utcToZonedTime } from 'date-fns-tz'
 
-// export default function Books({books}){
-//     return (
-//         <div>
-//             <Navbar />
-//             <div style={styles.mainContainer}>
-//                 <div style={styles.container}>
-//                     <h1 className="mt-4">Renzo Book Library</h1> 
-//                     {books.map((book, index) => (
-//                         <Link key={index} style={styles.LinkContainer}  href={'/books/' + (book.id).toString()}>
-//                             <div style={styles.BookContainer} className="bg-dark">
-//                                     <p>Book {index+1}</p>
-//                                 <h3>Title: {book.title}</h3>
-//                                 <p>Pages: {book.pages}</p>
-//                                 <p>Language: {book.language}</p>
-//                             </div>
-//                         </Link>
-//                     ))}
-//                 </div>
-//             </div>
-//         </div>
-//     )
-// }
-
-
-
-export default function Page({ data, data2 }) {
-    const [datetimetoShow, setDatetimetoShow] = React.useState(data?.datetime)
-    const [datetimetoShow2, setDatetimetoShow2] = React.useState(data2?.dateTime)
-    useEffect(() => {
-        // set the date now from the client side
-        setDatetimetoShow(moment().format())
-        setDatetimetoShow2(moment().format())
-    }, [])
+type Props = {
+    data: any, 
+    data2: any
+}
+export default function Page(props: Props) {
+    const date = new Date(props.data.utc_datetime)
+    const timeZone = props.data.timezone
+    const zonedDate = utcToZonedTime(props.data.datetime, timeZone)
+    
+    const date2 = new Date(props.data2.dateTime)    // this converts the date to the client's timezone... 
+    const timeZone2 = props.data2.timeZone
+    const zonedDate2 = utcToZonedTime(date2, timeZone2)      // client's timezone time is converted to the timezone given. 
+    
+    console.log("zonedDate", zonedDate.toString(), "date", date, "timeZone", timeZone)
+    console.log("zonedDate2", zonedDate2.toString(), "date2", date2, "timeZone2", timeZone2)
     return (
         <div>
             <h1>Server Side</h1>
-            {/* <p>datetime - {data?.datetime.toString()}</p>
-            <p>datetime now - {moment().format()}</p>
+            <p>datetime - {props.data?.datetime.toString()}</p>
 
-            <p>datetime - {moment(data2?.dateTime).format()}</p> */}
+            <p>utc_datetime - {props.data?.utc_datetime.toString()}</p>
+            <p>timezone - {props.data?.timezone.toString()}</p>
+            <p>zonedDate - {zonedDate.toString()}</p>
 
-            <p>datetime - {datetimetoShow}</p>
-            <p>datetime - {datetimetoShow2}</p>
+            <hr />
+            <p>dateTime - {props.data2?.dateTime.toString()}</p>
+            <p>timeZone - {props.data2?.timeZone.toString()}</p>
+            <p>zonedDate2 - {zonedDate2.toString()}</p>
         </div>
     )
 }

@@ -5,8 +5,9 @@ import { getServerSession } from "next-auth/next"
 import { authOptions } from "@/pages/api/auth/[...nextauth]"
 import HomeComponent from '@/components/HomeComponent'
 import Navbar from '@/components/book/Navbar'
+import styles from './Index.module.css'
 
-export default function home() {
+export default function Index() {
     const { data: session } = useSession()
     console.log(session)
 
@@ -14,7 +15,7 @@ export default function home() {
         return (
             <>
                 <Navbar />
-                <p style={styles.textAccess}>Access Denied</p>
+                <p className={styles.textAccess}>Access Denied</p>
             </>
         )
     }
@@ -26,7 +27,7 @@ export default function home() {
     )
 }
 
-export async function getServerSideProps(context) {
+export async function getServerSideProps(context: any) {
     const session = await getServerSession(context.req, context.res, authOptions)
     if (!session) {
         return {
@@ -43,10 +44,3 @@ export async function getServerSideProps(context) {
     }
 }
 
-const styles = {
-    textAccess: {
-        textAlign: 'center',
-        fontSize: '2rem',
-        marginTop: '2rem'
-    }
-}

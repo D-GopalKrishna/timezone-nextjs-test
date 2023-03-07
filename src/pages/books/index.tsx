@@ -37,7 +37,7 @@ export default function Books(props: Props) {
 
 
 export const getServerSideProps = wrapper.getServerSideProps(store => async (context) => {
-    const res = await fetch(`http://localhost:3000/api/books`)
+    const res = await fetch(`/api/books`)
     const books = await res.json()
     console.log("store in Books List Page:", books)
     store.dispatch(setupbookInfo({books: books}))

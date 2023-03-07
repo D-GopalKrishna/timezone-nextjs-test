@@ -42,7 +42,8 @@ export default function Page(props: Props) {
     )
 }
 
-export const getServerSideProps = wrapper.getServerSideProps(store => async (context) => {
+
+export async function getServerSideProps(context) {
     const res = await fetch(`http://worldtimeapi.org/api/timezone/Asia/Kolkata`)
     const data = await res.json()
     console.log("res", res.json())
@@ -63,4 +64,4 @@ export const getServerSideProps = wrapper.getServerSideProps(store => async (con
     }
 
     return { props: { data: data, data2: data2 } }
-})
+}

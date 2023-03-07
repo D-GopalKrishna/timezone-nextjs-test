@@ -18,7 +18,7 @@ export default function Page(props: Props) {
     
     const date2 = new Date(props.data2.dateTime)    // this converts the date to the client's timezone... 
     const timeZone2 = props.data2.timeZone
-    const zonedDate2 = utcToZonedTime(date2, timeZone)      // client's timezone time is converted to the timezone given. 
+    const zonedDate2 = utcToZonedTime(date2, timeZone2)      // client's timezone time is converted to the timezone given. 
     
     console.log("zonedDate", zonedDate.toString(), "date", date, "timeZone", timeZone)
     console.log("zonedDate2", zonedDate2.toString(), "date2", date2, "timeZone2", timeZone2)
@@ -43,10 +43,9 @@ export default function Page(props: Props) {
 }
 
 
-export async function getServerSideProps(context) {
+export async function getServerSideProps(context: any) {
     const res = await fetch(`http://worldtimeapi.org/api/timezone/Asia/Kolkata`)
     const data = await res.json()
-    console.log("res", res.json())
     const data2 = {
         "year": 2023,
         "month": 3,

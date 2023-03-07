@@ -9,6 +9,7 @@ import { zonedTimeToUtc, utcToZonedTime } from 'date-fns-tz'
 type Props = {
     data: any, 
     data2: any,
+    servertimenow: any
 }
 
 export default function Page(props: Props) {
@@ -31,6 +32,7 @@ export default function Page(props: Props) {
     return (
         <div>
             <h1>Server Side</h1>
+            <p>servertimenow - {props.servertimenow}</p>
             <p>datetime - {props.data?.datetime.toString()}</p>
 
             <p>utc_datetime - {props.data?.utc_datetime.toString()}</p>
@@ -60,6 +62,6 @@ export async function getServerSideProps(context: any) {
     const data = await res.json()
     const res2 = await fetch(`http://worldtimeapi.org/api/timezone/America/New_York`)
     const data2 = await res2.json()
+    const servertimenow = new Date()
 
-    return { props: { data: data, data2: data2 }}
-}
+    return { props: { data: data, data2: data2, servertimenow: servertimenow.toString() }}}

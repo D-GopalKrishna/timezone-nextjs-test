@@ -35,9 +35,11 @@ export default function Books(props: Props) {
     )
 }
 
+const dev = process.env.NODE_ENV !== 'production';
+const server = dev ? 'http://localhost:3000' : 'https://test-projects-nextjs-test-7pb8.vercel.app';
 
 export const getServerSideProps = wrapper.getServerSideProps(store => async (context) => {
-    const res = await fetch(`/api/books`)
+    const res = await fetch(`${server}/api/books`)
     const books = await res.json()
     console.log("store in Books List Page:", books)
     store.dispatch(setupbookInfo({books: books}))

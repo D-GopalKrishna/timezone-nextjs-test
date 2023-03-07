@@ -18,7 +18,7 @@ export default function IndividualBook(props: BookParams) {
     }
 
     return (
-        <>
+        <div>
             <Navbar />
             <div key={props.book?.id} style={styles.container}>
                 <button onClick={() => window.history.back()} className="btn bg-dark text-white mb-5">Go Back</button>            
@@ -28,7 +28,7 @@ export default function IndividualBook(props: BookParams) {
                     <p>Language: {props.book?.language}</p>
                 </div>
             </div>
-        </>
+        </div>
     )
 }
 

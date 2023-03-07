@@ -28,12 +28,13 @@ export const bookInfoSlice = createSlice({
         setupbookInfo: (state: BookStoreType, action: PayloadAction<BookStoreType>) => {
             console.log('setupbookInfo', state, action.payload);
             let response = action.payload
+            state.books = response.books
         },
             
     },
     extraReducers: {
         [HYDRATE]: (state: any, action: any) => {
-            // console.log('HYDRATE', action.payload);
+            console.log('HYDRATE', action.payload);
             if (action.payload.bookStore.books) {
                 const newbookList = action.payload.bookStore.books
                 return {

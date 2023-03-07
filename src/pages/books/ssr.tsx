@@ -13,11 +13,11 @@ type Props = {
 export default function Page(props: Props) {
     const date = new Date(props.data.utc_datetime)
     const timeZone = props.data.timezone
-    const zonedDate = utcToZonedTime(props.data.datetime, timeZone)
+    const zonedDate = utcToZonedTime(date, timeZone)
     
     const date2 = new Date(props.data2.dateTime)    // this converts the date to the client's timezone... 
     const timeZone2 = props.data2.timeZone
-    const zonedDate2 = utcToZonedTime(date2, timeZone2)      // client's timezone time is converted to the timezone given. 
+    const zonedDate2 = utcToZonedTime(date2, timeZone)      // client's timezone time is converted to the timezone given. 
     
     console.log("zonedDate", zonedDate.toString(), "date", date, "timeZone", timeZone)
     console.log("zonedDate2", zonedDate2.toString(), "date2", date2, "timeZone2", timeZone2)
@@ -27,6 +27,9 @@ export default function Page(props: Props) {
             <p>datetime - {props.data?.datetime.toString()}</p>
 
             <p>utc_datetime - {props.data?.utc_datetime.toString()}</p>
+            <p>utc_datetime converted to client (which is also given by an attribute) timezone- {utcToZonedTime(props.data?.utc_datetime.toString(), timeZone).toString()}</p>
+            <p>utc_datetime converted to client (which is also given by an attribute) timezone (in ISO string) - {utcToZonedTime(props.data?.utc_datetime.toString(), timeZone).toISOString()}</p>
+            <p>utc_datetime converted to client (which is also given by an attribute) timezone (in UTC string) - {utcToZonedTime(props.data?.utc_datetime.toString(), timeZone).toUTCString()}</p>
             <p>timezone - {props.data?.timezone.toString()}</p>
             <p>zonedDate - {zonedDate.toString()}</p>
 
@@ -41,7 +44,7 @@ export default function Page(props: Props) {
 export const getServerSideProps = wrapper.getServerSideProps(store => async (context) => {
     const res = await fetch(`http://worldtimeapi.org/api/timezone/Asia/Kolkata`)
     const data = await res.json()
-    console.log("res", res)
+    console.log("res", res.json())
     const data2 = {
         "year": 2023,
         "month": 3,

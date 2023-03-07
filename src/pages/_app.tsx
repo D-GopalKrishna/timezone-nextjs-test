@@ -7,7 +7,6 @@ import { Provider } from 'react-redux';
 // Custom app imports 
 import {makeStore as store, wrapper} from '@/store/store'
 
-
 // Global CSS
 import '@/styles/globals.css'
 import 'bootstrap/dist/css/bootstrap.css'

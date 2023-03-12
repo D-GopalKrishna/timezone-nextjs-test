@@ -10,6 +10,7 @@ import {makeStore as store, wrapper} from '@/store/store'
 // Global CSS
 import '@/styles/globals.css'
 import 'bootstrap/dist/css/bootstrap.css'
+import "react-datepicker/dist/react-datepicker.css";
 
 // Theme CSS 
 import '../theme/style.css';

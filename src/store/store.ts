@@ -10,7 +10,6 @@ export interface State {
     bookStore: BookStoreType;
 }
 
-
 export const makeStore = () =>
     configureStore({
         reducer: {
